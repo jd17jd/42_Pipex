@@ -6,23 +6,20 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2023/11/30 17:52:05 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:39:40 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
 /*
-1. Parsing
 
-The input must be correct. We need to handle unexpected data
-
-Opening "infile" and "outline" and if necessary, exiting the program
+1. Parsear
+La entrada debe ser correcta. Necesitamos manejar datos inesperados.
+Debemos abrir "infile" y "outfile" y si es necesario, salir del programa.
 
 2. Main
-
-It has to look something like this
-
+Tiene que tener una pinta como esta:
 main()
 {
 	ft_init_pipex()
@@ -36,8 +33,10 @@ main()
 
 
 3. ft_init_pipex
-It's used to fill your struct with some default data
-because we will need to check the propoerties witing our struct in our cleanup function
+Se usa para llenar su estructura con algunos datos predeterminados
+ya que probablemente checkaras las propiedades de tu struct in tu funcion cleanup()
+
+4. ft_check_args
 
 4. ft_check_args
 Opens all files needed and handles here_doc as well as /dev/urandom.
