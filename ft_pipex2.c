@@ -8,12 +8,13 @@ int main (int argc, char *argv[])
 {
     int fd[2];
     if (pipe(fd) == -1) {
+        perror("Error al crear la tuberia");
         return (1);
     }
 
     int id1 = fork();
     if (id1 < 0) {
-        perror("Error al crear la tuberia");
+        perror("Error al crear el proceso");
         return (2);
     }
 
@@ -26,13 +27,13 @@ int main (int argc, char *argv[])
     }
 
     int id2 = fork();
-    if (id1 < 0) {
-        perror("Error al crear la tuberia");
+    if (id2 < 0) {
+        perror("Error al crear el proceso");
         return (3);
     }
 
     if (id2 == 0) {
-        //Child process 1 (ping)
+        //Child process 2 (grep)
         dup2(fd[0], STDIN_FILENO); //Duplica el primer fd al segundo, cerrando el segundo 
         close(fd[0]);
         close(fd[1]); //Se queda abierto aunque lo acabemos de duplicar, no solo  mueva el fd sino que lo duplica

@@ -1,0 +1,74 @@
+/*
+
+1. Parsear
+La entrada debe ser correcta. Necesitamos manejar datos inesperados.
+Debemos abrir "infile" y "outfile" y si es necesario, salir del programa.
+
+2. Main
+Tiene que tener una pinta como esta:
+main()
+{
+	ft_init_pipex()
+	ft_check_args()
+	ft_parse_cmds()
+	ft_parse_args()
+	while (cmds)
+		ft_exec()
+	ft_cleanup()
+}
+
+
+3. ft_init_pipex
+Se usa para llenar su estructura con algunos datos predeterminados
+ya que probablemente checkaras las propiedades de tu struct in tu funcion cleanup()
+
+4. ft_check_args
+Simplemente abre todos los fiicheros necesarios y 
+
+which simply opens all files needed and handles here_doc as well as /dev/urandom. You should be able to get away with a custom get_next_line to complete them.
+
+4. ft_check_args
+Opens all files needed and handles here_doc as well as /dev/urandom.
+
+* It's recommended having two functions to parse and store the commands:
+one: will find the correct path using envp and store it in an array,
+the other: will contain the arguments to the program.
+This will help to build the required arguments for execve()
+
+5.1. ft_parse_cmds will create an array like this:
+["/bin/cat", "/usr/bin/head", "/usr/bin/wc"], and
+5.2.  ft_parse_args will use ft_split to yield a 2D array like this one:
+[["cat"], ["head", "-n", "5"], ["wc", "-l"]] (remember to NULL terminate your arrays!).
+
+Really recomended using a struct and storing all the data within it
+
+6. The execution: The core idea of this program is to mimic the data flow between programs.
+Running the below scripts in your terminal should output the same data
+(you need to use double quotes for commands with arguments):
+
+7. ft_exec()
+ft_exec()
+{
+	pipe()
+	fork()
+	if (child)
+	{
+		dup2()
+		execve()
+	}
+	else
+	{
+		close()
+	}
+}
+
+After creating the pipe and creating the child process,
+the child runs the command and redirects the stdout
+from the command into the write end of the pipe using dup2(2).
+
+The parent then ‘catches’ the output from the read end of the pipe,
+and outputs it back to the stdin. This is the main mechanism behind
+the relationship between parent and child process.
+
+
+*/
