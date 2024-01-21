@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2023/11/30 23:28:27 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:05:57 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int ft_check_files(char *argumentos[])
         perror("Error. Ambos no existen o no tienen permisos necesarios\n");
         return (2);
     }
-    
     if (access(argumentos[1], F_OK | R_OK) == -1) {
         perror("Error. El primer fichero no existe o no tiene accesos de lectura\n");
         return (3);
@@ -69,6 +68,7 @@ int ft_check_commands (char *argumentos[])
 	//execve();
 	return (0);
 }
+
 
 void	process_child(char *argv[], int *fd, char *envp[])
 {
