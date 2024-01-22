@@ -4,6 +4,8 @@ ESTRUCTURA DE ACCESS:
 
 OBJETIVO:
 	Comprueba si el programa puede acceder en el modo indicado al pathname file
+
+RESULTADO:
 	0 en caso de éxito, -1 en caso de error
 
 PARAMETROS:

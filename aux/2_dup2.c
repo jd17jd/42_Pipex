@@ -4,6 +4,8 @@ ESTRUCTURA DE DUP2:
 
 OBJETIVO:
 	La función devuelve un nuevo descriptor de archivo (newfd) que está asociado con el mismo archivo que oldfd.
+
+RESULTADO:
 	newfd en caso de éxito, -1 en caso de error.
 	
 	A tener en cuenta:
