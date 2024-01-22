@@ -43,11 +43,5 @@ En este fichero voy a explicar los pasos que tengo que seguir para hacer el proy
         La entrada debe ser correcta. Necesitamos manejar datos inesperados.
             Correcto acceso de los ficheros
             Comandos parseados en un array
-
-
-/**
- * 1. Comprobacion de argumentos de programa
- * 2. Comprobacion de correcto funcionamiento de comandos
- * X. Creacion del proceso hijo
- * X. Creacion del proceso padre
-*/
+    2. Creacion del proceso hijo
+    3. creacion del proceso padre

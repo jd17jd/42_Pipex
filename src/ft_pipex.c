@@ -6,25 +6,19 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/21 23:52:42 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/22 23:13:01 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
-/* ./pipex file1 cmd1 cmd2 file2 */
-/* < file1 cmd1 | cmd2 > file2 */
-/* < infile grep ejemplo | wc -w > outfile */
-
-
 /**
  * Comprueba si los argumentos son correctos
- * @param argumentos: 
+ * @param argumentos: ficheros a evaluar
  * @return 0 en caso de que no haya ningun error, otro numero en caso contrario
 */
 int ft_check_files(char *argumentos[])
 {
-
     if (access(argumentos[1], F_OK | R_OK) == -1
     && (access(argumentos[4], F_OK | W_OK) == -1)) {
         perror("Error. Ambos no existen o no tienen permisos necesarios\n");
@@ -41,8 +35,6 @@ int ft_check_files(char *argumentos[])
 
     return (0);
 }
-
-// int execve(const char *path, char *const argv[], char *const envp[]);
 
 /**
  * 
@@ -76,13 +68,13 @@ int main(int argc, char *argv[], char *envp[])
 {
 	int fd[2];
 	pid_t pid;
-	
+
     //Num de argumentos
     if (argc != 5) {
         perror("Error. Numero introducido incorrecto de parámetros\n");
         return 1;
     }
-
+    
 	ft_check_files(argv); //Comprueba los ficheros
 	ft_check_commands(argv); //Parsea los comandos
 
@@ -97,8 +89,11 @@ int main(int argc, char *argv[], char *envp[])
         return (6);
 	}
 	
-	// if (pid == 0)
-		// process_child();
+	if (pid == 0) { //Child process
+        dup2(fd[1], STDOUT_FILENO); //Duplica el primer fd al segundo, cerrando el segundo 
+        close(fd[0]); // Cierra el extremo de lectura de la tuberia
+        close(fd[1]); // Cierra el extremo de escritura de la tuberia
+    }
 	
 	process_parent();
     return (0);
