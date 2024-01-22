@@ -6,36 +6,24 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2023/12/14 20:05:57 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/21 23:52:42 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
-// ft_init_pipex()
-
-/* <infile ls -l | wc -l >outfile */
-/* infile "ls -l" "wc -l" outfile */
-
-/* <infile grep a1 | wc -w >outfile */
-/* infile "grep a1" "wc -w" outfile */
-
-/**
- * 1. Comprobacion de argumentos de programa
- * 2. Comprobacion de correcto funcionamiento de comandos
- * X. Creacion del proceso hijo
- * X. Creacion del proceso padre
-*/
+/* ./pipex file1 cmd1 cmd2 file2 */
+/* < file1 cmd1 | cmd2 > file2 */
+/* < infile grep ejemplo | wc -w > outfile */
 
 
 /**
- * Checkear si los argumentos son correctos
- * @param argc: Numero de argumentos del programa
- * @param argumentos: Los argumentos en si
+ * Comprueba si los argumentos son correctos
+ * @param argumentos: 
  * @return 0 en caso de que no haya ningun error, otro numero en caso contrario
 */
 int ft_check_files(char *argumentos[])
-{ //Ficheros de lectura y escritura
+{
 
     if (access(argumentos[1], F_OK | R_OK) == -1
     && (access(argumentos[4], F_OK | W_OK) == -1)) {
@@ -43,11 +31,11 @@ int ft_check_files(char *argumentos[])
         return (2);
     }
     if (access(argumentos[1], F_OK | R_OK) == -1) {
-        perror("Error. El primer fichero no existe o no tiene accesos de lectura\n");
+        perror("Error. file1 no existe o no tiene permiso de lectura\n");
         return (3);
     }
     if (access(argumentos[4], F_OK | W_OK) == -1) {
-        perror("Error. El segundo fichero no existe o no tiene accesos de escritura\n");
+        perror("Error. file2 no existe o no tiene permiso de escritura\n");
         return (4);
     }
 
@@ -56,6 +44,9 @@ int ft_check_files(char *argumentos[])
 
 // int execve(const char *path, char *const argv[], char *const envp[]);
 
+/**
+ * 
+*/
 int ft_check_commands (char *argumentos[])
 { //Comandos correctos para ejecutar
 
@@ -92,8 +83,8 @@ int main(int argc, char *argv[], char *envp[])
         return 1;
     }
 
-	ft_check_files(argv);
-	ft_check_commands(argv);
+	ft_check_files(argv); //Comprueba los ficheros
+	ft_check_commands(argv); //Parsea los comandos
 
 	if (pipe(fd) == -1) {
         perror("Error al crear la tuberia");
@@ -106,8 +97,8 @@ int main(int argc, char *argv[], char *envp[])
         return (6);
 	}
 	
-	if (pid == 0)
-		process_child();
+	// if (pid == 0)
+		// process_child();
 	
 	process_parent();
     return (0);

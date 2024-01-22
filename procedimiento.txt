@@ -1,0 +1,53 @@
+En este fichero voy a explicar los pasos que tengo que seguir para hacer el proyecto
+
+- ESPECIFICACIONES DEL PROYECTO:
+    - Tu programa deberá ser ejecutado así:
+        ./pipex file1 cmd1 cmd2 file2
+            file1 & file2 son ficheros
+            cmd1 & cmd2 son comandos de shell con sus agumentos
+
+    - Tendrá que hacer exactamente lo mismo que el siguiente comando shell
+        $> < file1 cmd1 | cmd2 > file2
+            Echemos un ojo a esto en detalle con el ejemplo "< infile grep ejemplo | wc -w > outfile"
+            - "infile":
+                contiene "Hola esto es un ejemplo"
+            - "<":
+                Es un simbolo de "redireccion de entrada"
+                Redirige el contenido del fichero a la entrada estandar para que cuando grep esté leyendo de la entrada estandar, tome el contenido del fichero infile
+            
+            - "|":
+                La | (tuberia) redirige la salida del comando de la izquierda a la entrada del comando a la derecha.
+                En ese caso, el simbolo | redirige la salida del comando grep a la entrada del comando wc
+                Sin la tubería, la salida del comando grep se escribe directamente en la salida estandar.
+                    "Hola esto es un ejemplo" // Nos devuelve la linea por salida estandar donde ha encontrado "ejemplo"
+                Cuando introducimos el pipe (< infile grep ejemplo | wc -w) obtenemos:
+                    5 //Que son las palabras que cuenta con el comando "wc -c"
+
+            - ">":
+                Es un simbolo de "redireccion de salida"
+                Redirige el contenido del resultado del comando wc (tras el pipe) al fichero outfile
+                
+    - Tu programa no deberá dar leaks de memoria !
+
+- OBJETIVO DEL PROYECTO:
+    - Desarrollar un programa que simule las tuberias en el shell
+    
+- INFORMACION IMPORTANTE:
+    - Este programa requiere usar muchas funciones nuevas que nunca hemos usado antes. Explicaré un poco sobre ellas más tarde
+    - 
+
+- FUNCIONES QUE UTILIZAREMOS
+
+- ALGORITMO:
+    1. Parsear:
+        La entrada debe ser correcta. Necesitamos manejar datos inesperados.
+            Correcto acceso de los ficheros
+            Comandos parseados en un array
+
+
+/**
+ * 1. Comprobacion de argumentos de programa
+ * 2. Comprobacion de correcto funcionamiento de comandos
+ * X. Creacion del proceso hijo
+ * X. Creacion del proceso padre
+*/
