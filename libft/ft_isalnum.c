@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.h                                         :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 02:10:53 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/23 01:19:48 by jvivas-g         ###   ########.fr       */
+/*   Created: 2023/01/12 13:21:35 by jvivas-g          #+#    #+#             */
+/*   Updated: 2023/04/07 00:29:26 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PIPEX_H
-# define FT_PIPEX_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
-
-/* FUNCIONES AUXILIARES */
-#endif
+/**
+ * Alphanumeric character test
+*/
+int	ft_isalnum(int c)
+{
+	return (ft_isalpha(c) || ft_isdigit(c));
+}

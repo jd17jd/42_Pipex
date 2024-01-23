@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/22 23:13:01 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/23 02:01:58 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,14 @@ int ft_check_files(char *argumentos[])
 /**
  * 
 */
-int ft_check_commands (char *argumentos[])
-{ //Comandos correctos para ejecutar
+char **arguments_divided(char *argv[], int n)
+{
+    char **res;
 
-    char **segundo_arg;
-	char **tercer_arg;
-
-	segundo_arg = ft_split(argumentos[2], ' ');
-	tercer_arg = ft_split(argumentos[3], ' ');
-
-	//execve();
-	return (0);
+    res = ft_split(argv[n], ' ');
+    return (res);
 }
+
 
 
 void	process_child(char *argv[], int *fd, char *envp[])
@@ -58,8 +54,8 @@ void	process_child(char *argv[], int *fd, char *envp[])
 	int		fd2;
 
 	fd2 = open_file(argv[1], 0);
-	dup2(fd2, 0);
-	dup2(fd[1], 1);
+	dup2(fd2, 0); 
+	dup2(fd[1], STDOUT_FILENO); //Duplica el primer fd al segundo, cerrando el segundo 
 	close(fd[0]);
 	exec(argv[2], envp);
 }
@@ -74,27 +70,23 @@ int main(int argc, char *argv[], char *envp[])
         perror("Error. Numero introducido incorrecto de parámetros\n");
         return 1;
     }
-    
 	ft_check_files(argv); //Comprueba los ficheros
-	ft_check_commands(argv); //Parsea los comandos
 
-	if (pipe(fd) == -1) {
+	if (pipe(fd) == -1) { //Crea la tuberia
         perror("Error al crear la tuberia");
         return (5);
     }
 
-	pid = fork();
+	pid = fork(); //Creamos un nuevo proceso
 	if (pid == -1) {
 		perror("Error al crear el proceso");
         return (6);
 	}
 	
 	if (pid == 0) { //Child process
-        dup2(fd[1], STDOUT_FILENO); //Duplica el primer fd al segundo, cerrando el segundo 
-        close(fd[0]); // Cierra el extremo de lectura de la tuberia
-        close(fd[1]); // Cierra el extremo de escritura de la tuberia
+        process_child(arguments_divided(argv, 2), fd, envp);
     }
 	
-	process_parent();
+	process_parent(arguments_divided(argv, 3), fd, envp);
     return (0);
 }

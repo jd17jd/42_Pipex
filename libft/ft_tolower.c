@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.h                                         :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 02:10:53 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/23 01:19:48 by jvivas-g         ###   ########.fr       */
+/*   Created: 2023/01/13 12:34:17 by jvivas-g          #+#    #+#             */
+/*   Updated: 2023/04/07 00:50:47 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PIPEX_H
-# define FT_PIPEX_H
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
-
-/* FUNCIONES AUXILIARES */
-#endif
+#include "libft.h"
+/**
+ * Converts an upper-case letter to the corresponding lower-case letter.
+ */
+int	ft_tolower(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		c = c + 32;
+	return (c);
+}

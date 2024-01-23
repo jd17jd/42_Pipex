@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.h                                         :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 02:10:53 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/23 01:19:48 by jvivas-g         ###   ########.fr       */
+/*   Created: 2023/01/12 13:53:09 by jvivas-g          #+#    #+#             */
+/*   Updated: 2023/04/07 00:30:53 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PIPEX_H
-# define FT_PIPEX_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
-
-/* FUNCIONES AUXILIARES */
-#endif
+/**
+ * Printable character test
+*/
+int	ft_isprint(int c)
+{
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
+}

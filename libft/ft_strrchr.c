@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.h                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 02:10:53 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/23 01:19:48 by jvivas-g         ###   ########.fr       */
+/*   Created: 2023/02/02 19:31:55 by jvivas-g          #+#    #+#             */
+/*   Updated: 2023/10/09 02:15:07 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PIPEX_H
-# define FT_PIPEX_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+/**
+ * Locates last occurrence of "c" in string "s".
+ * @param s searched string
+ * @param c character to search
+ * @return Pointer to byte located, or NULL if there is no occurrence
+ */
+char	*ft_strrchr(const char *s, int c)
+{
+	int	len;
 
-/* FUNCIONES AUXILIARES */
-#endif
+	len = ft_strlen(s);
+	while (len >= 0)
+	{
+		if (s[len] == (char) c)
+			return ((char *)(s + len));
+		len--;
+	}
+	return (NULL);
+}

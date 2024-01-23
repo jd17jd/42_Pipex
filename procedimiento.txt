@@ -37,11 +37,22 @@ En este fichero voy a explicar los pasos que tengo que seguir para hacer el proy
     - 
 
 - FUNCIONES QUE UTILIZAREMOS
+    - acces(): Acceder a ficheros y comprobar permisos
+    - dup2(): Crear un nuevo fd asociado a un archivo ya existente
+    - pipe(): Crea una tuberia para la comunicacion entre procesos
+    - fork(): Crea un nuevo proceso duplicando el llamante
+    - waitpid(): Espera hasta que el proceso especificado haya terminado
+    - wait(): Espera hasta que algun proceso hijo haya terminado
+    - execve(): Ejecuta un programa en un nuevo proceso
+    - unlink(): Elimina un enlace a un archivo existente.
 
 - ALGORITMO:
     1. Parsear:
-        La entrada debe ser correcta. Necesitamos manejar datos inesperados.
-            Correcto acceso de los ficheros
-            Comandos parseados en un array
-    2. Creacion del proceso hijo
-    3. creacion del proceso padre
+        La entrada debe ser correcta. 5 argumenos con sus correspondientes permisos
+    2. Pasar el primer fichero al primer comando, ejecutar el comando y generar la salida
+    3. Mediante la tuberia, pasarle esta salida al siguiente comando
+    4. Ejecutar el comando y pasarlo al segundo fichero de salida
+
+La tubería debe comunicar los dos procesos.
+El paso 2 lo haremos en el proceso hijo
+El paso 3 lo haremos en el proceso padre
