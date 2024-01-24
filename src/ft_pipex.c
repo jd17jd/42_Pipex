@@ -6,34 +6,18 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/24 01:52:16 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:08:31 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
-
-int ft_check_open(char *arguments[], int n) {
-    int fRes;
-
-    if (n == 1)
-        fRes = open(arguments[n], O_RDONLY);
-    
-    if (n == 4)
-        fRes = open(arguments[n], O_CREAT | O_RDWR | O_TRUNC, 0644);
-
-    return (fRes);
-}
-
 /**
  * Comprueba si los argumentos son correctos
- * @param argumentos: ficheros a evaluar
+ * 
  * @return 0 en caso de que no haya ningun error, otro numero en caso contrario
 */
-int ft_check_files(char *arguments[], int fdInfile, int fdOutfile) {
-    
-    fdInfile = ft_check_open(arguments, 1);
-    fdOutfile = ft_check_open(arguments, 4);
+int ft_check_files(int fdInfile, int fdOutfile) {
     
     if (fdInfile == -1) {
         perror("Error. file1 no existe o no tiene permiso de lectura\n");
@@ -47,22 +31,6 @@ int ft_check_files(char *arguments[], int fdInfile, int fdOutfile) {
     
     return (0);
 }
-
-/* int ft_check_files(char *argumentos[])
-{
-    // Si el primero no existe --> Error
-    if (access(argumentos[1], F_OK | R_OK) == -1) {
-        perror("Error. file1 no existe o no tiene permiso de lectura\n");
-        return (3);
-    }
-    // Si el segundo no existe --> Lo crea
-    if (access(argumentos[4], F_OK | W_OK) == -1) {
-        perror("Error. file2 no existe o no tiene permiso de escritura\n");
-        return (4);
-    }
-
-    return (0);
-} */
 
 /**
  * 
@@ -111,7 +79,9 @@ int main(int argc, char *argv[], char *envp[])
     }
     
     //Comprobamos los ficheros
-    if (ft_check_files(argv, fdInfile, fdOutfile) == -1)
+    fdInfile = open(argv[1], O_RDONLY, 0644);
+    fdOutfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+    if (ft_check_files(fdInfile, fdOutfile) == -1)
         return (2);
         
     if (pipe(fd) == -1) { //Crea la tuberia
