@@ -4,6 +4,7 @@ ESTRUCTURA DE DUP2:
 
 OBJETIVO:
 	La función devuelve un nuevo descriptor de archivo (newfd) que está asociado con el mismo archivo que oldfd.
+	Redirige el newfd al archivo asociado por oldfd. Después de esta redirección, cualquier cosa que normalmente se dirigiría a newfd irá a oldfd
 
 RESULTADO:
 	newfd en caso de éxito, -1 en caso de error.
@@ -27,9 +28,10 @@ int main()
 	int fd;
  
 	fd = open("example.txt", O_WRONLY | O_CREAT, 0644);
-	dup2(fd, STDOUT_FILENO);
+	dup2(fd, STDOUT_FILENO); 
 	close(fd);
-	printf("This is printed in example.txt!\n");
+	fprintf(stdout, "This is printed in example.txt!\n"); //stdout ahora mismo está asociado al fichero
+	fprintf(stderr, "This is printed in standard error!\n");
  
 	return (0);
 }

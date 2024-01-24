@@ -31,10 +31,6 @@ En este fichero voy a explicar los pasos que tengo que seguir para hacer el proy
 
 - OBJETIVO DEL PROYECTO:
     - Desarrollar un programa que simule las tuberias en el shell
-    
-- INFORMACION IMPORTANTE:
-    - Este programa requiere usar muchas funciones nuevas que nunca hemos usado antes. Explicaré un poco sobre ellas más tarde
-    - 
 
 - FUNCIONES QUE UTILIZAREMOS
     - acces(): Acceder a ficheros y comprobar permisos
@@ -49,10 +45,16 @@ En este fichero voy a explicar los pasos que tengo que seguir para hacer el proy
 - ALGORITMO:
     1. Parsear:
         La entrada debe ser correcta. 5 argumenos con sus correspondientes permisos
-    2. Pasar el primer fichero al primer comando, ejecutar el comando y generar la salida
-    3. Mediante la tuberia, pasarle esta salida al siguiente comando
-    4. Ejecutar el comando y pasarlo al segundo fichero de salida
+    2. Generar la tuberia
+    3. Una vez tenemos la tuberia con sus dos fds como extremos, creamos los procesos:
+    4. El proceso hijo ejecutará el primer comando
+        - Entrada: infile
+            - dup2(infile, STDIN_FILENO); //redirigimos el fichero a nuestra entrada estandar
+            - 
 
-La tubería debe comunicar los dos procesos.
-El paso 2 lo haremos en el proceso hijo
-El paso 3 lo haremos en el proceso padre
+        - Salida: end[1] (tuberia)
+    5. El proceso padre ejecutará el segundo comando
+        - Entrada: end[0] (tuberia)
+
+        - Salida: outfile
+
