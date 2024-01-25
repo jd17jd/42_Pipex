@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/24 16:08:31 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/25 02:31:52 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,57 @@ int ft_check_files(int fdInfile, int fdOutfile) {
     return (0);
 }
 
-/**
- * 
-*/
-char **arguments_divided(char *argv[], int n)
-{
-    char **res;
+char *find(char *cmd, char *paths[]) {
+    int i;
+    char *res;
+    char *almostPath;
+    char *accessable;
 
-    res = ft_split(argv[n], ' ');
+    i = 0;
+    res = 0;
+    while(paths[i] != NULL) {
+        almostPath = ft_strjoin(paths[i], "/");
+        accessable = ft_strjoin(almostPath, cmd);
+        free(almostPath);
+        if (access(accessable, F_OK | X_OK) == 0)
+            return(accessable);
+		free(accessable);
+        i++;
+    }
     return (res);
 }
 
-void    funcion() { //Funcion donde haga el execve()
-    
+char    *getPath(char *cmd, char *envp[]) {
+    int i;
+    char *res;
+    char **envp_divided;
+    char **envp_right;
+
+    i = 0;
+    while (envp[i] != NULL && i != -1) {
+        envp_divided = ft_split(envp[i], '=');
+        i++;
+        if (ft_strncmp(envp_divided[0], "PATH", 4) == 0) { 
+            envp_right = ft_split(envp_divided[1], ':');
+            i = -1;
+        }
+        //free_split(envp_divided);
+    }
+    res = find(cmd, envp_right);
+    //free_split(envp_right);
+    return (res);
+}
+
+void    execute(char *cmd[], char *envp[]) { //Funcion donde haga el execve()
+    char *cmdPath; // Definir la ruta al programa a ejecutar
+    char **cmdArguments; // Argumentos del programa (el último elemento debe ser NULL)
+
+    cmdArguments = ft_split(cmd, ' ');
+    cmdPath = getPath(cmdArguments[0], envp);
+    if (execve(cmdPath, cmdArguments, envp) == -1) {
+        perror("Error en execve");
+    }
+    //free_split(cmdArguments);
 }
 
 //Control de errores falta
@@ -53,7 +91,7 @@ void	child_process(char *argv[], int *fd, int fdInfile, char *envp[])
 	dup2(fdInfile, STDIN_FILENO); //Redirigimos la entrada estandar al infile
 	dup2(fd[1], STDOUT_FILENO); //Redirigimos la salida estandar a la entrada de la tuberia
 	close(fd[0]); //Cerramos la salida de la tubería
-	funcion(argv[2], envp); //Ejecutamos el primer comando
+	execute(argv[2], envp); //Ejecutamos el primer comando
     close(fdInfile);
 }
 
@@ -63,7 +101,7 @@ void    parent_process(char *argv[], int *fd, int fdOutfile, char *envp[])
     dup2(fdOutfile, STDOUT_FILENO); //Redirigimos la salida estandar al ourfile
     dup2(fd[0], STDIN_FILENO); //Redirigimos la entrada estandar a la salida de la tuberia
     close(fd[1]); //Cerramos la entrada de la tuberia
-    funcion(argv[3], envp); // Ejecutamos el primer comando
+    execute(argv[3], envp); // Ejecutamos el primer comando
     close(fdOutfile);
 }
 
