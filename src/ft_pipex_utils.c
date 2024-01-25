@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:11:05 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/25 14:53:34 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:11:21 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	freeDoublePointer(char *strings[])
 }
 
 /**
- * Gets the path from the PATH value part given the command searched
+ * Gets the path from the given PATH-value part the command searched
  * @param cmd Command we're looking for
  * @param evp Environment variables
  * @return Success: The string with the result path. Failure: (null)
@@ -97,15 +97,16 @@ void    executeCmd(char *cmd, char *envp[])
 {
     char	*cmdPath;
     char	**cmdArguments;
-	//char	**cmdWithNull;
-	//Alocar memoria para uno más,
-	//Añadir lo de cmdArgument
-	//En el ultimo añadir NUll
+
+	// Alocar memoria para uno más,
+	// Añadir lo de cmdArgument
+	// En el ultimo añadir NUll
 	
     cmdArguments = ft_split(cmd, ' '); //Ultimo NULL
     cmdPath = getPath(cmdArguments[0], envp);
     if (execve(cmdPath, cmdArguments, envp) == -1) { //Check
         perror("No command was found to execute\n");
+        exit(5);
     }
     freeDoublePointer(cmdArguments);
 	free(cmdPath);

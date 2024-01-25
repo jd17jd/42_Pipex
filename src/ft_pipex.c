@@ -3,56 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 02:10:07 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/25 14:48:29 by jvivas-g         ###   ########.fr       */
+/*   Created: 2024/01/25 22:03:01 by jvivas-g          #+#    #+#             */
+/*   Updated: 2024/01/25 22:42:36 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
-/**
- * Checks if the given arguments are correct
- * @param fdInfile File descirptor of the input file
- * @param fdOutfile File descriptor of the output file
- * @return Success: 0. Failure: -1.
-*/
-int	ft_check_files(int fdInfile, int fdOutfile)
+//Control de errores falta
+void	childProcess(char *argv[], int *fd, char *envp[])
 {
+    int fdInfile;
+
+    fdInfile = open(argv[1], O_RDONLY, 0644);
     if (fdInfile == -1)
-	{
+    {
         perror("No such file or directory\n");
-        return (-1);
-    }  
-    if (fdOutfile == -1)
-	{
-        perror("Error occurred when trying to open or create the file\n");
-        return (-1);
+        exit(4);
     }
-    return (0);
-}
-
-//Control de errores falta
-/** 
- * 
-*/
-void	childProcess(char *argv[], int *fd, int fdInfile, char *envp[])
-{
-	dup2(fdInfile, STDIN_FILENO);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[0]);
-	executeCmd(argv[2], envp);
+    dup2(fdInfile, STDIN_FILENO);
+    dup2(fd[1], STDOUT_FILENO);
+    close(fd[0]);
+    executeCmd(argv[2], envp);
     close(fdInfile);
-	//unlinks?
+    //unlinks?
 }
 
 //Control de errores falta
-/**
- * 
-*/
-void    parentProcess(char *argv[], int *fd, int fdOutfile, char *envp[])
+void    parentProcess(char *argv[], int *fd, char *envp[])
 {
+    int fdOutfile;
+
+    fdOutfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+    if (fdOutfile == -1)
+    {
+        perror("Error occurred when trying to open or create the file\n");
+        exit (5);
+    }
 	wait(NULL);
     dup2(fdOutfile, STDOUT_FILENO);
     dup2(fd[0], STDIN_FILENO);
@@ -64,35 +53,30 @@ void    parentProcess(char *argv[], int *fd, int fdOutfile, char *envp[])
 
 int main(int argc, char *argv[], char *envp[])
 {
-    int fdInfile, fdOutfile, fd[2];
+    int fd[2];
 	pid_t pid;
 
-    //Num de argumentos
-    if (argc != 5) {
+    if (argc != 5) { //OK
         perror("Incorrect number of parameters entered\n");
         return (1);
     }
-    
-    //Comprobamos los ficheros
-    fdInfile = open(argv[1], O_RDONLY, 0644);
-    fdOutfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-    if (ft_check_files(fdInfile, fdOutfile) == -1)
-        return (2);
+
+    //check_access_files(argv);
         
-    if (pipe(fd) == -1) { //Crea la tuberia
+    if (pipe(fd) == -1) { //OK
         perror("Error creating pipe\n");
-        return (3);
+        return (2);
     }
 
-	pid = fork(); //Creamos un nuevo proceso
+	pid = fork(); //OK
 	if (pid == -1) {
 		perror("Error creating process\n");
-        return (4);
+        return (3);
 	}
-	
+    
 	if (pid == 0)
-        childProcess(argv, fd, fdInfile, envp);
-	
-	parentProcess(argv, fd, fdOutfile, envp);
+        childProcess(argv, fd, envp);
+    
+    parentProcess(argv, fd, envp);
     return (0);
 }

@@ -24,10 +24,10 @@ PARAMETROS:
 
 int main() {
     // Definir la ruta al programa a ejecutar
-    const char *programPath = "/bin/ls";
+    const char *programPath = "/usr/bin/grep";
 
     // Argumentos del programa (el último elemento debe ser NULL)
-    char *const arguments[] = {"/bin/ls", "-l", NULL};
+    char *const arguments[] = {"/usr/bin/grep", "ejemplo", NULL};
 
     // Variables de entorno (pueden ser NULL)
     char *const environment[] = {NULL};

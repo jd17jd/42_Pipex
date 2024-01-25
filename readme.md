@@ -57,6 +57,8 @@ EXPLICACION DEL DESAROLLO DEL PROYECTO
             - Cerramos la salida de la tubería
             - Ejecutamos el primer comando
             - Cerramos el descriptor de infile porque no lo usaremos más
+            - Cerrar el extremo de escritura del hijo
+            - Salir después de ejecutar executeCmd
             - Eliminamos enlaces a archivos(?)
         - Salida: end[1] (tuberia)
 

@@ -1,9 +1,2 @@
-total 104
--rw-r--r--   1 juandiegovivasguevara  staff   1538 Jan 25 14:22 Makefile
--rw-r--r--   1 juandiegovivasguevara  staff    569 Jan 25 14:25 infile
-drwxr-xr-x  82 juandiegovivasguevara  staff   2624 Jan 25 14:25 lib
--rw-r--r--   1 juandiegovivasguevara  staff      9 Jan 25 14:26 outfile
--rwxr-xr-x   1 juandiegovivasguevara  staff  34360 Jan 25 14:25 pipex
--rw-r--r--   1 juandiegovivasguevara  staff   3627 Jan 25 13:38 readme.md
-drwxr-xr-x   7 juandiegovivasguevara  staff    224 Jan 25 13:51 resources
-drwxr-xr-x   7 juandiegovivasguevara  staff    224 Jan 25 14:24 src
+Esto es un ejemplo
+Esto es una prueba
