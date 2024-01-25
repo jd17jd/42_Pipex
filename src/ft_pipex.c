@@ -6,11 +6,39 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:03:01 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/25 22:42:36 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:43:17 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
+
+/**
+ * Checks if the given arguments are correct
+ * @param fdInfile File descirptor of the input file
+ * @param fdOutfile File descriptor of the output file
+ * @return Success: 0. Failure: -1.
+*/
+// Creo que no hace falta porque ya lo hacemos en los procesos
+/*
+void    check_files(char *files[])
+{
+    if (access(files[1], F_OK | R_OK) == -1
+    && (access(files[4], F_OK | W_OK) == -1))
+    {
+        perror("Error occured when trying to access both files\n");
+        exit(1);
+    }
+    if (access(files[1], F_OK | R_OK) == -1)
+    {
+        perror("No such file or directory\n");
+        exit(2);
+    }
+    if ((access(files[4], F_OK) == 0) && (access(files[4], W_OK) == -1))
+    {
+       perror("Error occurred when trying to access the file\n");
+       exit(3);
+    }
+} */
 
 //Control de errores falta
 void	childProcess(char *argv[], int *fd, char *envp[])
