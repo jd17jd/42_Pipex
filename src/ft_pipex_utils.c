@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:11:05 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/25 13:49:22 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:53:34 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void    executeCmd(char *cmd, char *envp[])
     cmdArguments = ft_split(cmd, ' '); //Ultimo NULL
     cmdPath = getPath(cmdArguments[0], envp);
     if (execve(cmdPath, cmdArguments, envp) == -1) { //Check
-        perror("Error en execve");
+        perror("No command was found to execute\n");
     }
     freeDoublePointer(cmdArguments);
 	free(cmdPath);
