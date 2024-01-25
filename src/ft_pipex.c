@@ -6,13 +6,12 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:03:01 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/25 23:49:21 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/25 23:58:58 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
-//Control de errores falta
 void	child_process(char *argv[], int *fd, char *envp[])
 {
 	int	fd_infile;
@@ -31,7 +30,6 @@ void	child_process(char *argv[], int *fd, char *envp[])
 	close(fd_infile);
 }
 
-//Control de errores falta
 void	parent_process(char *argv[], int *fd, char *envp[])
 {
 	int	fd_outfile;
