@@ -1,6 +1,6 @@
-En este fichero voy a explicar los pasos que tengo que seguir para hacer el proyecto
+EXPLICACION DEL DESAROLLO DEL PROYECTO
 
-- ESPECIFICACIONES DEL PROYECTO:
+- ESPECIFICACIONES:
     - Tu programa deberá ser ejecutado así:
         ./pipex file1 cmd1 cmd2 file2
             file1 & file2 son ficheros
@@ -29,7 +29,7 @@ En este fichero voy a explicar los pasos que tengo que seguir para hacer el proy
                 
     - Tu programa no deberá dar leaks de memoria !
 
-- OBJETIVO DEL PROYECTO:
+- OBJETIVO:
     - Desarrollar un programa que simule las tuberias en el shell
 
 - FUNCIONES QUE UTILIZAREMOS
@@ -45,16 +45,33 @@ En este fichero voy a explicar los pasos que tengo que seguir para hacer el proy
 - ALGORITMO:
     1. Parsear:
         La entrada debe ser correcta. 5 argumenos con sus correspondientes permisos
+
     2. Generar la tuberia
-    3. Una vez tenemos la tuberia con sus dos fds como extremos, creamos los procesos:
+
+    3. Una vez tenemos la tuberia con sus dos fds como extremos, creamos los procesos
+
     4. El proceso hijo ejecutará el primer comando
         - Entrada: infile
-            - dup2(infile, STDIN_FILENO); //redirigimos el fichero a nuestra entrada estandar
-            - 
-
+            - Redirigimos la entrada estandar al infile
+            - Redirigimos la salida estandar a la entrada de la tuberia
+            - Cerramos la salida de la tubería
+            - Ejecutamos el primer comando
+            - Cerramos el descriptor de infile porque no lo usaremos más
+            - Eliminamos enlaces a archivos(?)
         - Salida: end[1] (tuberia)
+
     5. El proceso padre ejecutará el segundo comando
         - Entrada: end[0] (tuberia)
-
+            - Esperamos a que el proceso hijo termine
+            - Redirigimos la salida estandar al outfile
+            - Redirigimos la entrada estandar a la salida de la tuberia
+            - Cerramos la entrada de la tuberia
+            - Ejecutamos el segundo comando
         - Salida: outfile
 
+    6. Ejecutamos la funcion para ejecutar los comandos
+        - Definimos la ruta al programa a ejecutar
+        - Argumentos del programa (el último elemento debe ser NULL)
+        - Ejecutamos
+
+    7. Liberamos memoria y liberamos enlaces para evitar leaks 
