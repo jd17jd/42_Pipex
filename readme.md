@@ -44,7 +44,7 @@ EXPLICACION DEL DESAROLLO DEL PROYECTO
 
 - ALGORITMO:
     1. Parsear:
-        La entrada debe ser correcta. 5 argumenos con sus correspondientes permisos
+        - La entrada debe ser correcta. 5 argumenos con sus correspondientes permisos
 
     2. Generar la tuberia
 
@@ -52,23 +52,27 @@ EXPLICACION DEL DESAROLLO DEL PROYECTO
 
     4. El proceso hijo ejecutará el primer comando
         - Entrada: infile
+            - Comprobamos que se puede abrir el fichero. Si no, continuamos con el proceso padre
             - Redirigimos la entrada estandar al infile
             - Redirigimos la salida estandar a la entrada de la tuberia
-            - Cerramos la salida de la tubería
+            - Cerramos la salida de la tuberia
+            - Cerramos la entrada de la tubería
+                (Una vez que el proceso ha redirigido sus entradas y salidas estandar, ya no necesita los extremos del pipe. Por lo tanto, es seguro cerrarlos)
             - Ejecutamos el primer comando
             - Cerramos el descriptor de infile porque no lo usaremos más
-            - Cerrar el extremo de escritura del hijo
-            - Salir después de ejecutar executeCmd
-            - Eliminamos enlaces a archivos(?)
         - Salida: end[1] (tuberia)
 
     5. El proceso padre ejecutará el segundo comando
         - Entrada: end[0] (tuberia)
+            - Comprobamos que se puede abrir el fichero, Si no se puede abrir ni crear --> Error
             - Esperamos a que el proceso hijo termine
             - Redirigimos la salida estandar al outfile
             - Redirigimos la entrada estandar a la salida de la tuberia
+            - Cerramos la salida de la tuberia
             - Cerramos la entrada de la tuberia
+                (Igual que antes)
             - Ejecutamos el segundo comando
+            - Cerramos el descriptor de outfile porque no lo usaremos más
         - Salida: outfile
 
     6. Ejecutamos la funcion para ejecutar los comandos
@@ -76,4 +80,4 @@ EXPLICACION DEL DESAROLLO DEL PROYECTO
         - Argumentos del programa (el último elemento debe ser NULL)
         - Ejecutamos
 
-    7. Liberamos memoria y liberamos enlaces para evitar leaks 
+    7. Liberamos memoria
