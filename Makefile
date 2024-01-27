@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+         #
+#    By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/25 13:52:27 by jvivas-g          #+#    #+#              #
-#    Updated: 2024/01/25 14:22:18 by jvivas-g         ###   ########.fr        #
+#    Updated: 2024/01/27 19:57:50 by jvivas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SOURCES = \
 
 LIBFT = lib/libft.a
 
-INCLUDE = src/ft_pipex.h
+INCLUDE = inc/ft_pipex.h
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
