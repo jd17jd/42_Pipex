@@ -6,11 +6,11 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:03:01 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/25 23:58:58 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:04:37 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pipex.h"
+#include "../inc/ft_pipex.h"
 
 void	child_process(char *argv[], int *fd, char *envp[])
 {

@@ -6,11 +6,11 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:11:05 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/25 23:57:40 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:04:27 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pipex.h"
+#include "../inc/ft_pipex.h"
 
 /**
  * Gets the path in the format: route value + / + cmd
