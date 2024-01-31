@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:53 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/02/01 00:24:53 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/02/01 00:26:52 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	child_process(char *argv[], int *fd, char *envp[]);
 void	parent_process(char *argv[], int *fd, char *envp[]);
 
 /* FUNCIONES AUXILIARES */
-int		ft_check_files(int fd_infile, int fd_outfile);
 void	free_double_pointer(char *strings[]);
 char	*find_path(char *cmd, char *paths[]);
 char	*get_path(char *cmd, char *envp[]);
