@@ -6,60 +6,52 @@
 #    By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 18:38:00 by jvivas-g          #+#    #+#              #
-#    Updated: 2024/01/25 14:19:12 by jvivas-g         ###   ########.fr        #
+#    Updated: 2024/01/28 01:19:17 by jvivas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SOURCES = \
-		ft_atoi.c ft_bzero.c ft_calloc.c \
-		ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
-		ft_itoa.c \
-		ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
-		ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-		ft_split.c \
-		ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
-		ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
-		ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
-		
-BONUS = \
-		ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-		ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c \
+# Colores
+COLOR_RESET = "\033[0m"
+COLOR_VERDE = "\033[32m"
 
-INCLUDE = libft.h
+# Directorios de origen
+SRC = src
+INC = inc
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
+# Lista de archivos fuente
+SOURCES := $(wildcard $(SRC)/*/*.c)
 
-%.o: %.c ${INCLUDE}
-		@echo "Compiling\n"
-		@${CC} ${CFLAGS} -c $< -o $@
-		
-		
-OBJECTS = ${SOURCES:.c=.o}
-BONUS_OBJECTS = ${BONUS:.c=.o}
+# Lista de archivos cabecera
+INCLUDE := $(wildcard $(INC)/*.h)
 
+CC := gcc
+CFLAGS := -Wall -Wextra -Werror
+RM := rm -f
 
-${NAME}: ${OBJECTS} $(INCLUDE)
-		@ar -rsc ${NAME} ${OBJECTS}
-		@echo "Created $(NAME)\n"
-	
-bonus: ${OBJECTS} ${BONUS_OBJECTS} $(INCLUDE)
-		@ar -rsc $(NAME) $^
-		@echo "Bonus compiled correctly $(NAME)\n"
+# Creación de objetos
+OBJECTS := $(patsubst %.c, %.o, $(SOURCES))
 
-all: ${NAME}
+# Reglas de compilación
+%.o: %.c
+	@echo "Compiling $(notdir $<)"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+# Reglas principales
+$(NAME): $(OBJECTS) $(INCLUDE)
+	@ar rsc $(NAME) $(OBJECTS)
+	@echo $(COLOR_VERDE) "Created $(NAME)" $(COLOR_RESET)
+
+all: $(NAME)
 
 clean:
-		@${RM} ${OBJECTS} ${BONUS_OBJECTS}
-		@echo "All objects cleaned\n"
+	@$(RM) $(OBJECTS)
+	@echo $(COLOR_VERDE) "All objects cleaned" $(COLOR_RESET)
 
 fclean: clean
-		@${RM} ${NAME}
-		@${RM} bonus
-		@echo "All executable cleaned\n"
+	@$(RM)	$(NAME)
+	@echo $(COLOR_VERDE) "All executable cleaned" $(COLOR_RESET)
 
 re: fclean all
 

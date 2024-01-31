@@ -3,52 +3,60 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+         #
+#    By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/25 13:52:27 by jvivas-g          #+#    #+#              #
-#    Updated: 2024/01/27 20:04:49 by jvivas-g         ###   ########.fr        #
+#    Updated: 2024/02/01 00:21:06 by jvivas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SOURCES = \
-		src/ft_pipex.c \
-		src/ft_pipex_utils.c \
+# Colores
+COLOR_RESET = "\033[0m"
+COLOR_VERDE = "\033[32m"
 
+# Directorios de origen
+SRC = src
+
+# Lista de archivos fuente
+SOURCES := $(wildcard $(SRC)/*.c)
+
+# Libreria
 LIBFT = lib/libft.a
-
-INCLUDE = inc/ft_pipex.h
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-%.o: %.c ${INCLUDE}
-		@echo "Compiling\n"
-		@${CC} ${CFLAGS} -c $< -o $@
+# Creación de objetos
+OBJECTS := $(patsubst %.c, %.o, $(SOURCES))
 
-OBJECTS = ${SOURCES:.c=.o} 
+# Reglas de compilación
+%.o: %.c
+	@echo "Compiling $(notdir $<)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME}: ${OBJECTS} ${LIBFT}
-		@${CC} ${CFLAGS} ${OBJECTS} -L lib -lft -o ${NAME}
-		@echo "Created $(NAME)\n"
+# Reglas principales
+$(NAME): $(OBJECTS) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJECTS) -L lib -lft -o $(NAME)
+	@echo $(COLOR_VERDE) "Created $(NAME)" $(COLOR_RESET)
 
-all: ${NAME}
+all: $(NAME)
 
 clean:
-		@${RM} ${OBJECTS}
-		@$(MAKE) -C lib clean
-		@echo "All objects cleaned\n"
+	@$(RM) $(OBJECTS)
+	@$(MAKE) -C lib clean
+	@echo $(COLOR_VERDE) "All objects cleaned" $(COLOR_RESET)
 
 fclean: clean
-		@${RM} ${NAME}
-		@$(MAKE) -C lib fclean
-		@echo "All executable cleaned\n"
+	@$(RM)	$(NAME)
+	@$(MAKE) -C lib fclean
+	@echo $(COLOR_VERDE) "All executable cleaned" $(COLOR_RESET)
 
 re: fclean all
 
-${LIBFT}:
+$(LIBFT):
 	@$(MAKE) -C lib
 
 .PHONY: all clean fclean re
