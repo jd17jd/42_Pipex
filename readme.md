@@ -68,12 +68,14 @@ EXPLICACION DEL DESAROLLO DEL PROYECTO
             - Cerramos el extremo de escritura del pipe
             - Redirigimos la salida estandar al outfile
             - Redirigimos la entrada estandar a la salida de la tuberia (lectura dell pipe).
-            - Cerramos la salida de la tuberia
-            - Cerramos la entrada de la tuberia
-                (Igual que antes)
+            - Cerramos el extremo de lectura del pipe
             - Ejecutamos el segundo comando
             - Cerramos el descriptor de outfile porque no lo usaremos más
         - Salida: outfile
+    
+    6. En el proceso padre, se cierran ambos extremos del pipe después de crear ambos procesos hijos, ya que el padre no necesita usarlos directamente.
+
+    7. El proceso padre espera que ambos hijos terminen antes de finalizar, asegurándose de que los procesos de entrada y salida se ejecuten correctamente.
 
     6. Ejecutamos la funcion para ejecutar los comandos
         - Definimos la ruta al programa a ejecutar
