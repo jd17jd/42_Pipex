@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:03:01 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/27 20:04:37 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:34:06 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	parent_process(char *argv[], int *fd, char *envp[])
 		perror("Error occurred when trying to open or create the file\n");
 		exit (5);
 	}
-	wait(NULL);
 	dup2(fd_outfile, STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
@@ -72,6 +71,7 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	if (pid == 0)
 		child_process(argv, fd, envp);
-	parent_process(argv, fd, envp);
+	else
+		parent_process(argv, fd, envp);
 	return (0);
 }
