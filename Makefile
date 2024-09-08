@@ -6,7 +6,7 @@
 #    By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/25 13:52:27 by jvivas-g          #+#    #+#              #
-#    Updated: 2024/09/08 18:49:57 by jvivas-g         ###   ########.fr        #
+#    Updated: 2024/09/08 19:24:01 by jvivas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ COLOR_RESET = "\033[0m"
 COLOR_VERDE = "\033[32m"
 
 # Lista de archivos fuente
-SOURCES = src/ft_pipex_utils.c src/ft_pipex.c
+SOURCES = src/ft_pipex_utils_2.c src/ft_pipex_utils.c src/ft_pipex.c
 
 # Lista de archivos objeto
-OBJECTS = src/ft_pipex_utils.o src/ft_pipex.o
+OBJECTS = src/ft_pipex_utils_2.o src/ft_pipex_utils.o src/ft_pipex.o
 
 # Libreria
 LIBFT = lib/libft.a
@@ -35,6 +35,10 @@ $(NAME): $(OBJECTS) $(LIBFT)
 	@echo $(COLOR_VERDE) "Created $(NAME)" $(COLOR_RESET)
 
 # Reglas de compilación para cada archivo objeto
+src/ft_pipex_utils_2.o: src/ft_pipex_utils_2.c
+	@echo "Compiling ft_pipex_utils_2.c"
+	@$(CC) $(CFLAGS) -c src/ft_pipex_utils_2.c -o src/ft_pipex_utils_2.o
+
 src/ft_pipex_utils.o: src/ft_pipex_utils.c
 	@echo "Compiling ft_pipex_utils.c"
 	@$(CC) $(CFLAGS) -c src/ft_pipex_utils.c -o src/ft_pipex_utils.o

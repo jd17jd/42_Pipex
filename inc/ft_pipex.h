@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:53 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/02/01 00:26:52 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/09/08 20:38:48 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@
 # include "../lib/inc/libft.h"
 
 /* FUNCIONES PRINCIPALES */
-void	child_process(char *argv[], int *fd, char *envp[]);
-void	parent_process(char *argv[], int *fd, char *envp[]);
+void	child_input_process(char *argv[], int *fd, char *envp[]);
+void	child_output_process(char *argv[], int *fd, char *envp[]);
 
 /* FUNCIONES AUXILIARES */
 void	free_double_pointer(char *strings[]);
 char	*find_path(char *cmd, char *paths[]);
 char	*get_path(char *cmd, char *envp[]);
 void	execute_cmd(char *cmd, char *envp[]);
+void	ft_perror(char *str, int code);
+void	ft_error(char *str, int code);
 
 #endif

@@ -50,24 +50,24 @@ EXPLICACION DEL DESAROLLO DEL PROYECTO
 
     3. Una vez tenemos la tuberia con sus dos fds como extremos, creamos los procesos
 
-    4. El proceso hijo ejecutará el primer comando
+    4. El proceso hijo2 (pid1) ejecutará el primer comando
         - Entrada: infile
-            - Comprobamos que se puede abrir el fichero. Si no, continuamos con el proceso padre
+            - Comprobamos que se puede abrir el fichero.
+            - Cerramos el extremo de lectura del pipe
             - Redirigimos la entrada estandar al infile
-            - Redirigimos la salida estandar a la entrada de la tuberia
-            - Cerramos la salida de la tuberia
-            - Cerramos la entrada de la tubería
+            - Redirigimos la salida estandar a la entrada de la tuberia (escritura de pipe).
+            - Cerramos el extremo de escritura del pipe
                 (Una vez que el proceso ha redirigido sus entradas y salidas estandar, ya no necesita los extremos del pipe. Por lo tanto, es seguro cerrarlos)
             - Ejecutamos el primer comando
             - Cerramos el descriptor de infile porque no lo usaremos más
         - Salida: end[1] (tuberia)
 
-    5. El proceso padre ejecutará el segundo comando
+    5. El proceso hijo2 (pid2) ejecutará el segundo comando
         - Entrada: end[0] (tuberia)
             - Comprobamos que se puede abrir el fichero, Si no se puede abrir ni crear --> Error
-            - Esperamos a que el proceso hijo termine
+            - Cerramos el extremo de escritura del pipe
             - Redirigimos la salida estandar al outfile
-            - Redirigimos la entrada estandar a la salida de la tuberia
+            - Redirigimos la entrada estandar a la salida de la tuberia (lectura dell pipe).
             - Cerramos la salida de la tuberia
             - Cerramos la entrada de la tuberia
                 (Igual que antes)

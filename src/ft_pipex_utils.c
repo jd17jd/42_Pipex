@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:11:05 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/27 20:04:27 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/09/08 21:56:19 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ char	*get_path(char *cmd, char *envp[])
 	char	**envp_right;
 
 	i = 0;
+	if (envp == NULL || *envp == NULL)
+		ft_error("There is no PATH defined\n", 6);
+	if (cmd[0] == '/')
+		return (ft_strdup(cmd));
 	while (envp[i] != NULL && i != -1)
 	{
 		envp_divided = ft_split(envp[i], '=');
@@ -101,10 +105,16 @@ void	execute_cmd(char *cmd, char *envp[])
 
 	cmd_arguments = ft_split(cmd, ' ');
 	cmd_path = get_path(cmd_arguments[0], envp);
-	if (execve(cmd_path, cmd_arguments, envp) == -1)
+	if (!cmd_path)
 	{
-		perror("No command was found to execute\n");
-		exit(6);
+		ft_error("Command not found or no valid path\n", 7);
+		free_double_pointer(cmd_arguments);
+	}
+	if (execve(cmd_path, cmd_arguments, envp) < 0)
+	{
+		ft_error("Command not found or no valid path\n", 7);
+		free_double_pointer(cmd_arguments);
+		free(cmd_path);
 	}
 	free_double_pointer(cmd_arguments);
 	free(cmd_path);
