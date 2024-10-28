@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:11:05 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/09/08 21:56:19 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/10/28 01:53:18 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_path(char *cmd, char *envp[])
 	i = 0;
 	if (envp == NULL || *envp == NULL)
 		ft_error("There is no PATH defined\n", 6);
-	if (cmd[0] == '/')
+	if (cmd[0] == '/' || !ft_strncmp(cmd, "./", 2))
 		return (ft_strdup(cmd));
 	while (envp[i] != NULL && i != -1)
 	{
@@ -104,6 +104,11 @@ void	execute_cmd(char *cmd, char *envp[])
 	char	**cmd_arguments;
 
 	cmd_arguments = ft_split(cmd, ' ');
+	if (!cmd_arguments || !cmd_arguments[0])
+	{
+		ft_error("Permission denied\n", 7);
+		free_double_pointer(cmd_arguments);
+	}
 	cmd_path = get_path(cmd_arguments[0], envp);
 	if (!cmd_path)
 	{
@@ -118,4 +123,23 @@ void	execute_cmd(char *cmd, char *envp[])
 	}
 	free_double_pointer(cmd_arguments);
 	free(cmd_path);
+}
+
+/**
+ * Waits the children processes and returns the exit code in error case
+ * @param pd1 The child process 1
+ * @param pd2 The child process 2
+ * @return the exit status code
+*/
+int	wait_for_children(pid_t pid1, pid_t pid2)
+{
+	int	status;
+
+	waitpid(pid1, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		return (WEXITSTATUS(status));
+	waitpid(pid2, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		return (WEXITSTATUS(status));
+	return (0);
 }

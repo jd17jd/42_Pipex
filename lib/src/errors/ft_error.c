@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 17:16:35 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/27 20:23:37 by jvivas-g         ###   ########.fr       */
+/*   Created: 2024/10/07 18:29:33 by jvivas-g          #+#    #+#             */
+/*   Updated: 2024/10/07 18:32:15 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
 
 /**
- * Sends the number "n" to the given file descriptor
- * @param n Number to send
- * @param fd The file descriptor to send "n"
+ * Shows error message when required followed by an specific exit code
+ * @param str String with the error message
+ * @param code Exit code
 */
-void	ft_putnbr_fd(int n, int fd)
+void	ft_error(char *str, int code)
 {
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return ;
-	}
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n = -n;
-	}
-	if (n >= 10)
-	{
-		ft_putnbr_fd(n / 10, fd);
-	}
-	ft_putchar_fd((n % 10) + '0', fd);
+	ft_putstr_fd(str, 2);
+	exit(code);
 }

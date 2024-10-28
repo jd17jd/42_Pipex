@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:10:53 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/09/08 20:38:48 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/10/27 23:40:39 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	free_double_pointer(char *strings[]);
 char	*find_path(char *cmd, char *paths[]);
 char	*get_path(char *cmd, char *envp[]);
 void	execute_cmd(char *cmd, char *envp[]);
-void	ft_perror(char *str, int code);
-void	ft_error(char *str, int code);
+int     wait_for_children(pid_t pid1, pid_t pid2);
 
 #endif

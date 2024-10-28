@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex_utils_2.c                                 :+:      :+:    :+:   */
+/*   ft_free_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 19:22:09 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/09/08 20:36:43 by jvivas-g         ###   ########.fr       */
+/*   Created: 2024/10/07 18:47:05 by jvivas-g          #+#    #+#             */
+/*   Updated: 2024/10/07 18:55:00 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_pipex.h"
+#include "../../inc/libft.h"
 
-void	ft_perror(char *str, int code)
+/**
+ * Free a 2D array of strings
+ * @param matrix Array to free
+ */
+void	ft_free_matrix(char **matrix)
 {
-	perror(str);
-	exit(code);
-}
+	int	i;
 
-void	ft_error(char *str, int code)
-{
-	ft_putstr_fd(str, 2);
-	exit(code);
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
 }

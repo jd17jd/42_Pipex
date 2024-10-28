@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+         #
+#    By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 18:38:00 by jvivas-g          #+#    #+#              #
-#    Updated: 2024/09/08 18:49:56 by jvivas-g         ###   ########.fr        #
+#    Updated: 2024/10/07 20:29:44 by jvivas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,16 @@ SOURCES = src/char/ft_isalnum.c \
           src/char/ft_isprint.c \
           src/char/ft_tolower.c \
           src/char/ft_toupper.c \
+		  src/errors/ft_error.c \
+		  src/errors/ft_perror.c \
           src/fd/ft_putchar_fd.c \
           src/fd/ft_putendl_fd.c \
           src/fd/ft_putnbr_fd.c \
           src/fd/ft_putstr_fd.c \
+		  src/gnl/get_next_line_bonus.c \
+		  src/gnl/get_next_line_utils_bonus.c \
+		  src/gnl/get_next_line_utils.c \
+		  src/gnl/get_next_line.c \
           src/lists/ft_lstadd_back.c \
           src/lists/ft_lstadd_front.c \
           src/lists/ft_lstclear.c \
@@ -37,6 +43,8 @@ SOURCES = src/char/ft_isalnum.c \
           src/lists/ft_lstmap.c \
           src/lists/ft_lstnew.c \
           src/lists/ft_lstsize.c \
+		  src/matrix/ft_dup_matrix.c \
+		  src/matrix/ft_free_matrix.c \
           src/mem/ft_bzero.c \
           src/mem/ft_calloc.c \
           src/mem/ft_memchr.c \
@@ -44,6 +52,8 @@ SOURCES = src/char/ft_isalnum.c \
           src/mem/ft_memcpy.c \
           src/mem/ft_memmove.c \
           src/mem/ft_memset.c \
+		  src/printf/ft_printf_utils.c \
+		  src/printf/ft_printf.c \
           src/str/ft_split.c \
           src/str/ft_strchr.c \
           src/str/ft_strdup.c \
@@ -69,10 +79,16 @@ OBJECTS = src/char/ft_isalnum.o \
           src/char/ft_isprint.o \
           src/char/ft_tolower.o \
           src/char/ft_toupper.o \
+		  src/errors/ft_error.o \
+		  src/errors/ft_perror.o \
           src/fd/ft_putchar_fd.o \
           src/fd/ft_putendl_fd.o \
           src/fd/ft_putnbr_fd.o \
           src/fd/ft_putstr_fd.o \
+		  src/gnl/get_next_line_bonus.o \
+		  src/gnl/get_next_line_utils_bonus.o \
+		  src/gnl/get_next_line_utils.o \
+		  src/gnl/get_next_line.o \
           src/lists/ft_lstadd_back.o \
           src/lists/ft_lstadd_front.o \
           src/lists/ft_lstclear.o \
@@ -82,6 +98,8 @@ OBJECTS = src/char/ft_isalnum.o \
           src/lists/ft_lstmap.o \
           src/lists/ft_lstnew.o \
           src/lists/ft_lstsize.o \
+		  src/matrix/ft_dup_matrix.o \
+		  src/matrix/ft_free_matrix.o \
           src/mem/ft_bzero.o \
           src/mem/ft_calloc.o \
           src/mem/ft_memchr.o \
@@ -89,6 +107,8 @@ OBJECTS = src/char/ft_isalnum.o \
           src/mem/ft_memcpy.o \
           src/mem/ft_memmove.o \
           src/mem/ft_memset.o \
+		  src/printf/ft_printf_utils.o \
+		  src/printf/ft_printf.o \
           src/str/ft_split.o \
           src/str/ft_strchr.o \
           src/str/ft_strdup.o \
@@ -147,6 +167,14 @@ src/char/ft_toupper.o: src/char/ft_toupper.c
 	@echo "Compiling ft_toupper.c"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+src/errors/ft_error.o: src/errors/ft_error.c
+	@echo "Compiling ft_error.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/errors/ft_perror.o: src/errors/ft_perror.c
+	@echo "Compiling ft_perror.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 src/fd/ft_putchar_fd.o: src/fd/ft_putchar_fd.c
 	@echo "Compiling ft_putchar_fd.c"
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -161,6 +189,22 @@ src/fd/ft_putnbr_fd.o: src/fd/ft_putnbr_fd.c
 
 src/fd/ft_putstr_fd.o: src/fd/ft_putstr_fd.c
 	@echo "Compiling ft_putstr_fd.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/gnl/get_next_line_bonus.o: src/gnl/get_next_line_bonus.c
+	@echo "Compiling get_next_line_bonus.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/gnl/get_next_line_utils_bonus.o: src/gnl/get_next_line_utils_bonus.c
+	@echo "Compiling get_next_line_utils_bonus.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/gnl/get_next_line_utils.o: src/gnl/get_next_line_utils.c
+	@echo "Compiling get_next_line_utils.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/gnl/get_next_line.o: src/gnl/get_next_line.c
+	@echo "Compiling get_next_line.c"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 src/lists/ft_lstadd_back.o: src/lists/ft_lstadd_back.c
@@ -199,6 +243,14 @@ src/lists/ft_lstsize.o: src/lists/ft_lstsize.c
 	@echo "Compiling ft_lstsize.c"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+src/matrix/ft_dup_matrix.o: src/matrix/ft_dup_matrix.c
+	@echo "Compiling ft_dup_matrix.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/matrix/ft_free_matrix.o: src/matrix/ft_free_matrix.c
+	@echo "Compiling ft_free_matrix.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 src/mem/ft_bzero.o: src/mem/ft_bzero.c
 	@echo "Compiling ft_bzero.c"
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -225,6 +277,14 @@ src/mem/ft_memmove.o: src/mem/ft_memmove.c
 
 src/mem/ft_memset.o: src/mem/ft_memset.c
 	@echo "Compiling ft_memset.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/printf/ft_printf_utils.o: src/printf/ft_printf_utils.c
+	@echo "Compiling ft_printf_utils.c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+src/printf/ft_printf.o: src/printf/ft_printf.c
+	@echo "Compiling ft_printf.c"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 src/str/ft_split.o: src/str/ft_split.c
@@ -307,3 +367,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+

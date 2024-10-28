@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:23:01 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/31 12:31:11 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/10/27 23:36:10 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <stdarg.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <errno.h>
+
+# define SEEK_SET 0
+# define SEEK_CUR 1
+# define SEEK_END 2
 
 typedef struct s_list
 {
@@ -47,6 +56,10 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+void	ft_error(char *str, int code);
+void	ft_perror(char *str, int code);
+char	**ft_dup_matrix(char **matrix);
+void	ft_free_matrix(char **matrix);
 
 /* PARTE 2 */
 
@@ -74,6 +87,14 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 
-/* FUNCIONES PUSH SWAP */
+/* FUNCIONES PRINTF */
+int		ft_putchar(const char c);
+int		ft_format(va_list args, char car);
+int		ft_printf(char const *str, ...);
+int		ft_putstr(const char *str);
+size_t	ft_strlen(const char *s);
+int		ft_put_base(unsigned long n, const char *base);
+int		ft_putptr(unsigned long ptr, const char *base);
+int		ft_putnbr(int n);
 
 #endif

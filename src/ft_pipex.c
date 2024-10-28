@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:03:01 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/09/08 21:58:46 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/10/28 01:43:58 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char *argv[], char *envp[])
 	int		fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
-	int		status;
+	int		exit_code;
 
 	if (argc != 5)
 		ft_error("Incorrect number of parameters entered\n", 1);
@@ -78,7 +78,6 @@ int	main(int argc, char *argv[], char *envp[])
 		child_output_process(argv, fd, envp);
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(pid1, &status, 0);
-	waitpid(pid2, &status, 0);
-	return (0);
+	exit_code = wait_for_children(pid1, pid2);
+	return (exit_code);
 }

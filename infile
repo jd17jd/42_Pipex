@@ -1,2 +1,11 @@
-Esto es un ejemplo
-Esto es una prueba
+total 36
+drwxr-xr-x 2 jvivas-g 2019    24 Sep  8 22:36 inc
+-rw-r--r-- 1 jvivas-g 2019     0 Oct 27 22:13 infile
+drwxr-xr-x 4 jvivas-g 2019    59 Oct 27 22:12 lib
+-rw-r--r-- 1 jvivas-g 2019  2239 Sep  8 22:36 Makefile
+-rw-r--r-- 1 jvivas-g 2019    37 Oct 27 22:11 outfile
+-rwxr-xr-x 1 jvivas-g 2019 17656 Oct 27 22:12 pipex
+-rw-r--r-- 1 jvivas-g 2019  4375 Sep  8 22:36 readme.md
+drwxr-xr-x 3 jvivas-g 2019   109 Sep 13 03:43 resources
+drwxr-xr-x 2 jvivas-g 2019   142 Oct 27 22:12 src
+drwxr-xr-x 2 jvivas-g 2019    49 Oct 27 22:11 test

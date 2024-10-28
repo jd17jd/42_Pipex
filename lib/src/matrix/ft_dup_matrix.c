@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_dup_matrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvivas-g <jvivas-g@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 17:16:35 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/01/27 20:23:37 by jvivas-g         ###   ########.fr       */
+/*   Created: 2024/10/07 18:55:25 by jvivas-g          #+#    #+#             */
+/*   Updated: 2024/10/07 19:50:20 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
 
-/**
- * Sends the number "n" to the given file descriptor
- * @param n Number to send
- * @param fd The file descriptor to send "n"
-*/
-void	ft_putnbr_fd(int n, int fd)
+/* Duplicates a char** object */
+char	**ft_dup_matrix(char **matrix)
 {
-	if (n == -2147483648)
+	char	**res;
+	int		i;
+
+	i = 0;
+	while (matrix[i])
+		i++;
+	res = (char **)ft_calloc(i + 1, sizeof(char *));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (matrix[i])
 	{
-		write(fd, "-2147483648", 11);
-		return ;
+		res[i] = ft_strdup(matrix[i]);
+		i++;
 	}
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n = -n;
-	}
-	if (n >= 10)
-	{
-		ft_putnbr_fd(n / 10, fd);
-	}
-	ft_putchar_fd((n % 10) + '0', fd);
+	return (res);
 }
