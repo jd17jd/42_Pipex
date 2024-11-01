@@ -1,1 +1,0 @@
-valgrind --trace-children=yes --track-fds=all ./pipex /dev/random cat "head -n 1" /dev/stdout

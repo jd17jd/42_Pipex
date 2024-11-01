@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:03:01 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/10/28 01:43:58 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:39:33 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ void	child_input_process(char *argv[], int *fd, char *envp[])
 
 	fd_infile = open(argv[1], O_RDONLY, 0644);
 	if (fd_infile < 0)
-		ft_error("No such file or directory\n", 4);
+	{
+		if (errno == ENOENT)
+			ft_error("No such file or directory\n", 4);
+		if (errno == EACCES)
+			ft_error("Permission denied\n", 4);
+		else
+			ft_error("Cannot open file\n", 4);
+	}
 	close(fd[0]);
 	dup2(fd_infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
@@ -45,7 +52,7 @@ void	child_output_process(char *argv[], int *fd, char *envp[])
 	int	fd_outfile;
 
 	fd_outfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd_outfile == -1)
+	if (fd_outfile < 0)
 		ft_error("Error occurred when trying to open or create the file\n", 5);
 	close(fd[1]);
 	dup2(fd_outfile, STDOUT_FILENO);

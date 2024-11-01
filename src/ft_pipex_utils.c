@@ -6,7 +6,7 @@
 /*   By: jvivas-g <jvivas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:11:05 by jvivas-g          #+#    #+#             */
-/*   Updated: 2024/10/28 01:53:18 by jvivas-g         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:41:00 by jvivas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,6 @@ int	wait_for_children(pid_t pid1, pid_t pid2)
 	int	status;
 
 	waitpid(pid1, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		return (WEXITSTATUS(status));
 	waitpid(pid2, &status, 0);
 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		return (WEXITSTATUS(status));

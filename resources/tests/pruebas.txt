@@ -1,0 +1,56 @@
+Comprobación leaks hijos
+    - valgrind --trace-children=yes --track-fds=all ./pipex /dev/random cat "head -n 1" /dev/stdout
+
+Pruebas:
+
+<infile ls -l | wc -c >/dev/stdout
+./pipex infile "ls -l" "wc -c" /dev/stdout
+
+
+
+<infile "" | "" >/dev/stdout
+./pipex infile "" "" /dev/stdout
+
+
+
+<infile "fsnfdjkjf" | "fnjfss" >/dev/stdout
+./pipex infile "fsnfdjkjf" "fnjfss" /dev/stdout
+
+
+
+<infile cat | cat >outfile
+./pipex infile cat cat outfile
+
+
+
+<infile ls -l | wc -l >outfile
+./pipex infile "ls -l" "wc -l" outfile
+
+
+
+<infile grep a | wc -w >outfile
+./pipex infile "grep a" "wc -w" outfile
+
+
+
+<infile tr a b | tr c d >outfile 
+./pipex infile "tr a b" "tr c d" outfile
+
+
+
+<infile tr a b | tr o '\n' >outfile
+./pipex infile "tr a b" "tr o \n" outfile2
+
+
+<infile /bin/ls | wc -l >outfile
+./pipex infile "/bin/ls" "wc -l" outfile
+
+
+
+<infile echo hola mundo | cat >outfile
+./pipex infile "echo hola mundo" cat outfile
+
+
+
+env -i  <infile ls | wc >outfile
+env -i ./pipex infile "ls" "wc" outfile
